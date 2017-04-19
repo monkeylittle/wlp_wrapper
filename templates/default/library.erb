@@ -1,0 +1,6 @@
+
+<server>
+  <library id="<%= @id %>">
+    <fileset dir="<%= @dir %>" includes="<%= @fileset.map { |i| i.name }.join(' ') %>"/>
+  </library>
+</server>

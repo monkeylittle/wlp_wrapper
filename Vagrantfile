@@ -52,7 +52,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         servers: {
           defaultServer: {
             enabled: true,
-            serverName: 'default',
             description: 'Default Server',
             featureManager: {
               feature: [ 'jsp-2.2' ]
@@ -63,6 +62,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
               httpPort: '8080',
               httpsPort: '8443'
             }
+          }
+        },
+
+        libraries: {
+          mysql5: {
+            fileset: [
+              { name:'mysql-connector-java-5.1.41.jar', source: 'https://search.maven.org/remotecontent?filepath=mysql/mysql-connector-java/5.1.41/mysql-connector-java-5.1.41.jar' }
+            ]
           }
         }
       }
