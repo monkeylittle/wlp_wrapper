@@ -32,14 +32,8 @@ The shared library can be referenced by name within an application or server ele
 wlp: {
   libraries: {
     mysql5: {
-      id: 'mysql5',
-      serverName: 'defaultServer',
       fileset: [
-        {
-          includes: [
-              { name:'mysql-connector-java-5.1.41.jar', source: 'https://search.maven.org/remotecontent?filepath=mysql/mysql-connector-java/5.1.41/mysql-connector-java-5.1.41.jar' }
-          ]
-        }
+        { name:'mysql-connector-java-5.1.41.jar', source: 'https://search.maven.org/remotecontent?filepath=mysql/mysql-connector-java/5.1.41/mysql-connector-java-5.1.41.jar' }
       ]
     }
   }
