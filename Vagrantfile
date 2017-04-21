@@ -61,7 +61,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
               host: '*',
               httpPort: '8080',
               httpsPort: '8443'
-            }
+            },
+            application: [
+              {
+                remote_file: 'https://bintray.com/monkeylittle/maven/download_file?file_path=org%2Fspringframework%2Fsamples%2Fspring-petclinic%2F4.3.6%2Fspring-petclinic-4.3.6.war',
+                checksum: '6fbc5099ef5fa621a1f9abf15081fc9c325768cbf31db7eef755efcaa4176037',
+                name: 'spring-petclinic',
+                type: 'war',
+                'context-root': 'spring-petclinic',
+                autoStart: true
+              }
+            ]
           }
         },
 

@@ -22,6 +22,38 @@ The wlp_wrapper cookbook is a wrapper cookbook for the [wlp_cookbook](https://su
 
 ## Usage
 
+### Applications
+
+```ruby
+wlp: {
+  servers: {
+    defaultServer: {
+      enabled: true,
+      description: 'Default Server',
+      featureManager: {
+        feature: [ 'jsp-2.2' ]
+      },
+      httpEndpoint: {
+        id: 'defaultHttpEndpoint',
+        host: '*',
+        httpPort: '8080',
+        httpsPort: '8443'
+      },
+      application: [
+        {
+          remote_file: 'https://bintray.com/monkeylittle/maven/download_file?file_path=org%2Fspringframework%2Fsamples%2Fspring-petclinic%2F4.3.6%2Fspring-petclinic-4.3.6.war',
+          checksum: '6fbc5099ef5fa621a1f9abf15081fc9c325768cbf31db7eef755efcaa4176037',
+          name: 'spring-petclinic',
+          type: 'war',
+          'context-root': 'spring-petclinic',
+          autoStart: true
+        }
+      ]
+    }
+  }
+}
+```
+
 ### Shared Libraries
 
 Shared libraries are files used by multiple applications (and servers).  They are used to reduce the number of duplicate library files on the system.  The shared library specifies a set of resources (for example JAR files).
