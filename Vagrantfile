@@ -62,15 +62,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
               httpPort: '8080',
               httpsPort: '8443'
             },
-            application: [
-              {
-                remote_file: 'https://bintray.com/monkeylittle/maven/download_file?file_path=org%2Fspringframework%2Fsamples%2Fspring-petclinic%2F4.3.6%2Fspring-petclinic-4.3.6.war',
-                checksum: '6fbc5099ef5fa621a1f9abf15081fc9c325768cbf31db7eef755efcaa4176037',
-                name: 'spring-petclinic',
-                type: 'war',
-                'context-root': 'spring-petclinic',
-                autoStart: true
-              }
+            include: [
+              { optional: false, location: '${shared.config.dir}/mysql5.library.xml' },
+              { optional: false, location: '${server.config.dir}/petclinic.application.xml' }
             ]
           }
         },
@@ -80,6 +74,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             fileset: [
               { name:'mysql-connector-java-5.1.41.jar', source: 'https://search.maven.org/remotecontent?filepath=mysql/mysql-connector-java/5.1.41/mysql-connector-java-5.1.41.jar' }
             ]
+          }
+        },
+
+        applications: {
+          petclinic: {
+            server_name: 'defaultServer',
+
+            resource: 'https://bintray.com/monkeylittle/maven/download_file?file_path=org%2Fspringframework%2Fsamples%2Fspring-petclinic%2F4.3.6%2Fspring-petclinic-4.3.6.war',
+            resource_checksum: '362feaf1b276847004ceaf485f856ed9ce2def2ee7fd4b7e4779a51504daa27a',
+            resource_provider: 'remote_file',
+
+            type: 'war',
+            context_root: 'petclinic',
+            auto_start: true
           }
         }
       }

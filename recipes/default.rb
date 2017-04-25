@@ -7,51 +7,28 @@
 # All rights reserved - Do Not Redistribute
 #
 
-# install WebSphere Application Server Liberty Profile
-
 liberty_utils = Liberty::Utils.new(node)
 
+# install liberty profile
 include_recipe 'wlp::default'
 
 # create shared libraries
-node[:wlp][:libraries].each_pair do |key, value|
-  map = value.to_hash()
-
-  wlp_wrapper_library key do
-    fileset value.fileset
+node[:wlp][:libraries].each_pair do |library_name, library_defn|
+  wlp_wrapper_library library_name do
+    fileset library_defn.fileset
   end
 end
 
-# source application remote files
-node[:wlp][:servers].each_pair do |key, value|
-  server_name = key
-  server_config = value.to_hash()
+# create applications
+node[:wlp][:applications].each_pair do |application_name, application_defn|
+  wlp_wrapper_application application_name do
+    context_root application_defn.context_root
 
-  server_dir = liberty_utils.serverDirectory(server_name)
+    resource application_defn.resource
+    resource_checksum application_defn.resource_checksum
+    resource_provider application_defn.resource_provider
 
-  app_dir = "#{server_dir}/apps"
-
-  directory app_dir do
-    owner node['wlp']['user']
-    group node['wlp']['group']
-    recursive true
-  end
-
-  server_config['application'].each_with_index do |application, application_index|
-    app_name = application['name']
-    app_type = application['type']
-
-    remote_file "#{app_dir}/#{app_name}.#{app_type}" do
-      source application['remote_file']
-      checksum application['checksum']
-      owner node['wlp']['user']
-      group node['wlp']['group']
-      action :create_if_missing
-    end
-
-    node.rm('wlp', 'servers', server_name, 'application', application_index, 'remote_file')
-
-    node.normal[:wlp][:servers][server_name][:application][application_index][:location] = "#{app_name}.#{app_type}"
+    server_name application_defn.server_name
   end
 end
 

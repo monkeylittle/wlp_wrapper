@@ -34,7 +34,6 @@ action :create do
       fileset: new_resource.fileset
     })
   end
-
 end
 
 action :destroy do
