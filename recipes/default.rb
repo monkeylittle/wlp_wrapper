@@ -13,14 +13,14 @@ liberty_utils = Liberty::Utils.new(node)
 include_recipe 'wlp::default'
 
 # create shared libraries
-node[:wlp][:libraries].each_pair do |library_name, library_defn|
+node['wlp']['libraries'].each_pair do |library_name, library_defn|
   wlp_wrapper_library library_name do
     fileset library_defn.fileset
   end
 end
 
 # create applications
-node[:wlp][:applications].each_pair do |application_name, application_defn|
+node['wlp']['applications'].each_pair do |application_name, application_defn|
   wlp_wrapper_application application_name do
     context_root application_defn.context_root
 
@@ -36,7 +36,7 @@ end
 include_recipe 'wlp::serverconfig'
 
 # start each server instance
-node[:wlp][:servers].each_pair do |key, value|
+node['wlp']['servers'].each_pair do |key, value|
   map = value.to_hash()
   enabled = map.delete("enabled")
   if enabled.nil? || enabled == true || enabled == "true"

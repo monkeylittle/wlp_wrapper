@@ -1,1 +1,3 @@
-default[:wlp][:libraries] = []
+default['wlp']['libraries'] = []
+
+default['wlp']['applications'] = []

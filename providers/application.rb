@@ -1,4 +1,6 @@
 
+use_inline_resources
+
 action :create do
 
   server_dir = @utils.serverDirectory(new_resource.server_name)

@@ -4,6 +4,8 @@ maintainer_email 'john.turner@monkeylittle.com'
 license          'All rights reserved'
 description      'Installs/Configures wlp_wrapper'
 long_description 'Installs/Configures wlp_wrapper'
+issues_url       'https://github.com/monkeylittle/wlp_wrapper/issues'
+source_url       'https://github.com/monkeylittle/wlp_wrapper'
 version          '0.1.0'
 
 depends 'wlp'

@@ -1,4 +1,6 @@
 
+use_inline_resources
+
 action :create do
 
   shared_config_dir = @utils.userDirectory + '/shared/config/'
